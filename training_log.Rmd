@@ -1,0 +1,17 @@
+---
+title: "Training Log"
+author: "Raeger Tay"
+date: "6 May 2016"
+output: html_document
+---
+
+# Mini-batch
+
+## train 1
+b=50
+epoch = 30
+learning_rate.mb = 1
+set.seed(21)
+Cost:  0.19259973303171
+"Training accuracy: 0.9757"
+"Validation accuracy: 0.941666666666667"
