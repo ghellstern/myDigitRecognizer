@@ -1,4 +1,4 @@
-miniBatch_gradient_descent <- function(input, label, parameters, batch_size, epoch, learning_rate) {
+miniBatch_gradient_descent <- function(input, label, parameters, batch_size, epoch, learning_rate, lambda=0) {
   
  
   # Title:
@@ -19,7 +19,7 @@ miniBatch_gradient_descent <- function(input, label, parameters, batch_size, epo
   ff <- feedforward(input = input, parameter.list = parameters) 
   
   # Compute initial cost
-  initial_cost <- ce_cost(output = ff$a[[3]], label = label)
+  initial_cost <- ce_cost(output = ff$a[[3]], label = label, lambda=lambda, parameters=parameters)
   print(paste("Initial cost:", initial_cost))
   
   # For monitoring of cost after each epoch
@@ -40,7 +40,7 @@ miniBatch_gradient_descent <- function(input, label, parameters, batch_size, epo
       
       # Backpropagation to get gradients of weight and bias
       grad <- backpropagation(ff=ff, parameter.list = parameters, 
-                              label=label[mb_matrix[,j],])
+                              label=label[mb_matrix[,j],], lambda=lambda, m=nrow(input))
       
       # Perform gradient descent
       parameters <- gradient_descent(parameter.list = parameters, 
@@ -56,7 +56,7 @@ miniBatch_gradient_descent <- function(input, label, parameters, batch_size, epo
     
     # Compute cost after each epoch for monitoring (can be turned off)
     ff<- feedforward(input = input, parameter.list = parameters)
-    new_cost <- ce_cost(output = ff$a[[3]], label = label)
+    new_cost <- ce_cost(output = ff$a[[3]], label = label, lambda=lambda, parameters=parameters)
     cost <- c(cost, new_cost)
     print(paste("Epoch", i, "completed."))
     print(paste("Cost: ", new_cost))

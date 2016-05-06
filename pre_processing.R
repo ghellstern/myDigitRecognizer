@@ -71,9 +71,10 @@ label.sample <- label.train[sample.index, ]
 #=========================================================
 
 # Set nn size
-size <- c(784,100,10)
+size <- c(784,20,10)
 
 # Initialize weights and biases for hidden and output layers
 source("initParameters.R")
 set.seed(20)
 parameters.sample <- initParameters(size=size)
+

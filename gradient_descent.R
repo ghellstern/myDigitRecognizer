@@ -1,7 +1,7 @@
 gradient_descent <- function(parameter.list, gradient.list, learning_rate) {
   
   # Title:
-  #   Perform gradient descent on parameters
+  #   Perform gradient update on parameters
   
   # Arguments:
   #   parameter.list- a list of matrices containing parameters

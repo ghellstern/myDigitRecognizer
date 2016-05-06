@@ -28,11 +28,13 @@ update_per_epoch = 200
 b = nrow(input)/update_per_epoch
 epoch = 30
 learning_rate.mb = 1
+lambda.mb = 0
 
 set.seed(21)
 trained_parameters <- miniBatch_gradient_descent(input=input, label=label, 
                                                  parameters=parameters, batch_size=b, 
-                                                 epoch=epoch, learning_rate=learning_rate.mb)
+                                                 epoch=epoch, learning_rate=learning_rate.mb,
+                                                  lambda = lambda.mb)
 
 
 #==============================================================================================
@@ -44,11 +46,13 @@ source("batch_gradient_descent.R")
 # Parameters
 batch = 200
 learning_rate.b = 1
+lambda.b = 1
 
 set.seed(21)
 trained_parameters <- batch_gradient_descent(input=input, label=label, 
                                                  parameters=parameters, batch=batch, 
-                                                 learning_rate=learning_rate.b)
+                                                 learning_rate=learning_rate.b,
+                                                  lambda = lambda.b)
 
 
 #============================================================================================
