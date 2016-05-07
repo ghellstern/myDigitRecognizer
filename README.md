@@ -1,4 +1,4 @@
-# Building neural network from scratch using R.
+# Building neural network from scratch using R
 Writing my own neural network (nn) without using any external library.
 The neural network will then be used on MNIST data to predict handwritten digits (from kaggle).
 
