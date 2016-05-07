@@ -5,13 +5,18 @@ date: "6 May 2016"
 output: html_document
 ---
 
-# Mini-batch
-
-## train 1
-b=50
+===========
+## run 1
+===========
+GD = minibatch
+nn size = c(784,20,10)
+parameter seed = 20
+update_per_epoch = 200
+b = nrow(input)/update_per_epoch
 epoch = 30
 learning_rate.mb = 1
-set.seed(21)
-Cost:  0.19259973303171
-Training accuracy: 0.9757
-Validation accuracy: 0.9417
+lambda.mb = 0
+GD seed = 21
+training accuracy = 0.9668
+validation accuracy = 0.944
+kaggle test accuracy = 0.91286

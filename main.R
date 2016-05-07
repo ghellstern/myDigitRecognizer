@@ -16,6 +16,12 @@ label <- label.sample
 parameters <- parameters.sample
 true.y <- train.sample[,1]
 
+# Mnist set 
+input <- mnist.scaled[,-1]
+label <- label
+parameters <- parameters.train
+true.y <- mnist.scaled[,1]
+
 
 #=================================================================================================
 # Mini-batch gradient descent
@@ -59,12 +65,13 @@ trained_parameters <- batch_gradient_descent(input=input, label=label,
 # Evaluation
 #============================================================================================
 
+source("predict_digit.R")
+
 #===================
 # Training accuracy
 #===================
 
 # Predict digits and accuracy
-source("predict_digit.R")
 ff <- feedforward(input = input, parameter.list = trained_parameters)
 pred.y <- predict_digit(ff$a[[3]])
 paste("Training accuracy:", mean(pred.y==true.y))
@@ -77,5 +84,17 @@ paste("Training accuracy:", mean(pred.y==true.y))
 ff.val <- feedforward(input = val[,-1], parameter.list = trained_parameters)
 val.y <- predict_digit(ff.val$a[[3]])
 paste("Validation accuracy:", mean(val.y==val[,1]))
+
+
+#===================
+# Predict test set
+#===================
+
+ff.test <- feedforward(input = test, parameter.list = trained_parameters)
+test.y <- predict_digit(ff.test$a[[3]])
+prop.table(table(test.y))
+write.table(data.frame(ImageId=1:length(test.y), Label=test.y),
+            file="./submission/run1.csv", 
+            row.names=FALSE, sep = ",")
 
 

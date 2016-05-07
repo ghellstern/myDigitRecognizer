@@ -18,36 +18,39 @@ for(digit in 0:9) {
   }
 }
 
-# Increase all pixel value by 1 to remove 0 & standardize to [0,1]
-# "train" is the standardized version of "mnist" dataset
-train <- mnist
-train[,-1] <- (train[,-1]+1)/255
+# Increase all pixel value by 1 to remove 0 & scaled to [0,1]
+mnist.scaled <- mnist
+mnist.scaled[,-1] <- (mnist.scaled[,-1]+1)/255
+
+# Create label matrix for mnist
+label <- matrix(0, nrow=nrow(mnist), ncol=10)
+for(i in 1:nrow(mnist)) {
+  label[i, mnist[i,1]+1] <- 1
+}
 
 # Split 30,000 examples for training and 12,000 for validation
 set.seed(41)
 train.index <- sample(1:nrow(mnist), size=30000)
-val <- train[-train.index,]
-train <- train[train.index,]
+val <- mnist.scaled[-train.index,]
+train <- mnist.scaled[train.index,]
 prop.table(table(val[,1]))
 prop.table(table(train[,1]))
 # Note: 1st column of train/val contains the y value, i.e the digit
 
 
-# Create label matrix for train dataset
-label.train <- matrix(0, nrow=nrow(train), ncol=10)
-for(i in 1:nrow(train)) {
-  label.train[i, train[i,1]+1] <- 1
-}
+# Subset label matrix for train dataset
+label.train <- label[train.index, ]
+
 
 #========================================================
 # Neural network size & parameters initialization (train)
 #========================================================
+source("initParameters.R")
 
 # Set nn size
 size<- c(784,100,10)
 
 # Initialize weights and biases for hidden and output layers
-source("initParameters.R")
 set.seed(20)
 parameters.train <- initParameters(size=size)
 
@@ -74,7 +77,14 @@ label.sample <- label.train[sample.index, ]
 size <- c(784,20,10)
 
 # Initialize weights and biases for hidden and output layers
-source("initParameters.R")
 set.seed(20)
 parameters.sample <- initParameters(size=size)
+
+
+#=================================================================================================
+# Test set
+#=================================================================================================
+
+# Read test set
+test <- read.csv("./input/test.csv")
 
