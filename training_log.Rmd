@@ -5,18 +5,66 @@ date: "6 May 2016"
 output: html_document
 ---
 
-===========
-## run 1
-===========
+=======================
+## Training/Validation
+=======================
 GD = minibatch
-nn size = c(784,20,10)
-parameter seed = 20
+nn size = c(784,200,10)
 update_per_epoch = 200
-b = nrow(input)/update_per_epoch
+batch_size = nrow(input)/update_per_epoch
 epoch = 30
 learning_rate.mb = 1
 lambda.mb = 0
-GD seed = 21
-training accuracy = 0.9668
-validation accuracy = 0.944
-kaggle test accuracy = 0.91286
+Training accuracy: 0.9724
+Validation accuracy: 0.9483
+
+
+GD = minibatch
+nn size = c(784,200,10)
+update_per_epoch = 200
+batch_size = nrow(input)/update_per_epoch
+epoch = 30
+learning_rate.mb = 1
+lambda.mb = 0.1
+Training accuracy: 0.9722
+Validation accuracy: 0.9481
+
+GD = minibatch
+nn size = c(784,200,10)
+update_per_epoch = 200
+batch_size = nrow(input)/update_per_epoch
+epoch = 30
+learning_rate.mb = 1
+lambda.mb = 1
+Training accuracy: 0.9713
+Validation accuracy: 0.9484
+
+GD = minibatch
+nn size = c(784,200,10)
+update_per_epoch = 200
+batch_size = nrow(input)/update_per_epoch
+epoch = 30
+learning_rate.mb = 1
+lambda.mb = 10
+Training accuracy: 0.9641
+Validation accuracy: 0.9499
+
+GD = minibatch
+nn size = c(784,200,10)
+update_per_epoch = 200
+batch_size = nrow(input)/update_per_epoch
+epoch = 30
+learning_rate.mb = 1
+lambda.mb = 30
+Training accuracy: 0.9513
+Validation accuracy: 0.9473
+
+GD = minibatch
+nn size = c(784,400,10)
+update_per_epoch = 200
+batch_size = nrow(input)/update_per_epoch
+epoch = 30
+learning_rate.mb = 1
+lambda.mb = 10
+Training accuracy: 0.9602
+Validation accuracy: 0.9460

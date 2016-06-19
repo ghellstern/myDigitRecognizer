@@ -19,8 +19,7 @@ for(digit in 0:9) {
 }
 
 # Increase all pixel value by 1 to remove 0 & scaled to [0,1]
-mnist.scaled <- mnist
-mnist.scaled[,-1] <- (mnist.scaled[,-1]+1)/255
+mnist.scaled <- cbind( mnist[,1], (mnist[,-1]+1)/256 ) 
 
 # Create label matrix for mnist
 label <- matrix(0, nrow=nrow(mnist), ncol=10)
@@ -48,7 +47,7 @@ label.train <- label[train.index, ]
 source("initParameters.R")
 
 # Set nn size
-size<- c(784,100,10)
+size<- c(784,200,10)
 
 # Initialize weights and biases for hidden and output layers
 set.seed(20)
